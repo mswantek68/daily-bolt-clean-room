@@ -53,8 +53,9 @@ ruleset or a separate ruleset:
 Invalid rule 'merge_queue'
 ```
 
-The workflow already supports the `merge_group` event, so no repository change
-is required if GitHub later makes merge queue available.
+The workflow already supports the `merge_group` event, so no workflow change
+is required if GitHub later makes merge queue available; the `main` ruleset
+would still need to be updated to enable the merge queue rule.
 
 ## Human intervention
 

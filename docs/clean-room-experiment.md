@@ -11,18 +11,18 @@
 | Remote location | <https://github.com/mswantek68/daily-bolt-clean-room> |
 | Visibility | Private |
 | Default branch | `main` |
-| Initial main commit | Pending initial foundation commit |
+| Initial main commit | `324be166b509667d7413638b56aebbd972e98734` |
 
 ## Automation and governance
 
 | Capability | Status |
 |---|---|
-| GitHub Actions | Pending first workflow run |
-| Runner availability | Pending first workflow run |
+| GitHub Actions | Available; workflow run `35740712567` succeeded |
+| Runner availability | GitHub-hosted `ubuntu-latest` runners verified |
 | Required validation checks | `Markdown`; `Repository structure` |
-| Branch protection | Pending configuration after initial push |
-| Pull-request integration | Pending branch protection configuration |
-| Merge queue | Pending availability assessment |
+| Branch protection | Blocked by the GitHub plan for this private repository |
+| Pull-request integration | Workflow enabled; enforcement blocked by branch protection availability |
+| Merge queue | Unavailable because branch protection or rulesets cannot be enabled |
 
 ## Clean-room attestations
 
@@ -36,4 +36,18 @@
 
 ## Human intervention
 
-Pending GitHub governance and runner verification.
+GitHub returned HTTP 403 for both repository rulesets and `main` branch
+protection:
+
+```text
+Upgrade to GitHub Pro or make this repository public to enable this feature.
+```
+
+The repository owner must upgrade the account plan or intentionally change the
+repository to public. After that decision, an administrator must protect
+`main`, require pull requests, require the `Markdown` and
+`Repository structure` checks, disallow bypasses, and enable merge queue when
+the resulting plan supports it.
+
+Until those controls are configured, the clean-room repository foundation is
+blocked from governance readiness.

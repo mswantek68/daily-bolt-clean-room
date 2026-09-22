@@ -9,7 +9,7 @@
 | Owner | `mswantek68` |
 | Local location | `C:\Users\mikeswantek\source\repos\daily-bolt-clean-room` |
 | Remote location | <https://github.com/mswantek68/daily-bolt-clean-room> |
-| Visibility | Private |
+| Visibility | Public as of `2026-09-22T15:26:28.025Z` |
 | Default branch | `main` |
 | Initial main commit | `324be166b509667d7413638b56aebbd972e98734` |
 
@@ -20,9 +20,9 @@
 | GitHub Actions | Available; workflow run `35740712567` succeeded |
 | Runner availability | GitHub-hosted `ubuntu-latest` runners verified |
 | Required validation checks | `Markdown`; `Repository structure` |
-| Branch protection | Blocked by the GitHub plan for this private repository |
-| Pull-request integration | Workflow enabled; enforcement blocked by branch protection availability |
-| Merge queue | Unavailable because branch protection or rulesets cannot be enabled |
+| Branch protection | Active through repository ruleset `23828893` |
+| Pull-request integration | Required with one approval and resolved review threads |
+| Merge queue | Unavailable; GitHub rejected the `merge_queue` rule with HTTP 422 |
 
 ## Clean-room attestations
 
@@ -34,20 +34,29 @@
 * No product implementation, architecture, or product code exists.
 * The repository has its own independent Git metadata and root commit.
 
-## Human intervention
+## Governance configuration
 
-GitHub returned HTTP 403 for both repository rulesets and `main` branch
-protection:
+The active `main` ruleset has no bypass actors and enforces:
+
+* Pull-request-based integration
+* One approving review
+* Approval of the latest push by someone other than its author
+* Resolution of review threads
+* The `Markdown` and `Repository structure` checks
+* Strict validation against the current `main` branch
+* Branch deletion and non-fast-forward protection
+
+GitHub returned HTTP 422 when merge queue was added as either part of the main
+ruleset or a separate ruleset:
 
 ```text
-Upgrade to GitHub Pro or make this repository public to enable this feature.
+Invalid rule 'merge_queue'
 ```
 
-The repository owner must upgrade the account plan or intentionally change the
-repository to public. After that decision, an administrator must protect
-`main`, require pull requests, require the `Markdown` and
-`Repository structure` checks, disallow bypasses, and enable merge queue when
-the resulting plan supports it.
+The workflow already supports the `merge_group` event, so no repository change
+is required if GitHub later makes merge queue available.
 
-Until those controls are configured, the clean-room repository foundation is
-blocked from governance readiness.
+## Human intervention
+
+An eligible reviewer must approve and merge the pull request that records this
+governance update. Merge queue remains an unavailable optional capability.
